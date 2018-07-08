@@ -1,0 +1,8 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "target": "es5",
+        "sourceMap": true,
+    },
+}

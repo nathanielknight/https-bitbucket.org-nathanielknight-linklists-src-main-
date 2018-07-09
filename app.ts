@@ -99,8 +99,18 @@ function appInit() {
     },
     {
       id: "asdfjkl",
-      content: "Make an app",
-      done: false
+      content: "Start making the thing",
+      done: true
+    },
+    {
+        id: "asdfjklasdf",
+        content: "Reconsider the thing",
+        done: true,
+    },
+    {
+        id: "continue",
+        content: "Continue making the thing",
+        done: false,
     },
     {
       id: "jklasdf",
@@ -112,3 +122,5 @@ function appInit() {
   ad = appdata;
   Render.into(APP_DIV, appdata);
 }
+
+window.onload = appInit;

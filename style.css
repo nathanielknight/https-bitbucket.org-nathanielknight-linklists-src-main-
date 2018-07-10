@@ -1,0 +1,21 @@
+body {
+    max-width: 40em;
+    margin: auto;
+    margin-top: 2em;
+
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    font-size: 16pt;
+    color: hsla(0, 0%, 3%, 1);
+
+    background: hsla(0, 0%, 97%, 1);
+}
+
+input[type='checkbox'] {
+    padding: 6px;
+    margin-right: 10px;
+    transform: scale(1.5);
+}
+
+input[type='checkbox']:checked + label {
+    text-decoration: line-through hsla(0, 0%, 50%, 1);
+}

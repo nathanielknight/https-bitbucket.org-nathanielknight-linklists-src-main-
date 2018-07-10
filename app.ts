@@ -39,20 +39,24 @@ namespace Render {
     element.classList.add("item-checkbox");
     element.id = item.id;
 
-    let checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.onclick = e => {
-      e.preventDefault();
+    let toggle = e => {
       appdata.toggle(element.id);
       Render.into(APP_DIV, appdata);
-    };
+    }
+
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("id", item.id);
+    checkbox.onclick = toggle;
     if (item.done) {
       checkbox.setAttribute("checked", "checked");
     }
     element.appendChild(checkbox);
 
-    let content = document.createElement("span");
+    let content = document.createElement("label");
     content.classList.add("item-content");
+    content.setAttribute("for", item.id);
+    content.onclick = toggle;
     content.innerText = item.content;
     element.appendChild(content);
 

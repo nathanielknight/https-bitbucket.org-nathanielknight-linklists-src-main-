@@ -1,0 +1,25 @@
+{
+  "name": "web-checklists",
+  "version": "0.1.0",
+  "description": "A url-based checklist page.",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "ava": "1.0.0-beta.6",
+    "typescript": "^3.0.0-dev.20180707"
+  },
+  "build": "tsc -p .",
+  "scripts": {
+    "test": "ava tests",
+    "watch-ts": "tsc -p . -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/nathanielknight/web-checklist.git"
+  },
+  "author": "Nathaniel Knight",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/nathanielknight/web-checklist#readme"
+}

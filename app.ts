@@ -108,36 +108,29 @@ namespace Render {
 let ad: AppData | null = null;
 
 function appInit() {
-  let items = <ChecklistItem[]>[
-    {
-      id: "begin",
-      content: "Have idea for a thing",
-      done: true
-    },
-    {
-      id: "asdfjkl",
-      content: "Start making the thing",
-      done: true
-    },
-    {
-        id: "asdfjklasdf",
-        content: "Reconsider the thing",
-        done: true,
-    },
-    {
-        id: "continue",
-        content: "Continue making the thing",
-        done: false,
-    },
-    {
-      id: "jklasdf",
-      content: "Publicize it widely",
-      done: false
-    }
-  ];
-  let appdata = new AppData(items);
-  ad = appdata;
-  Render.into(APP_DIV, appdata);
+  let appdata = appDataFromUrl();
+  if (appdata == null) {
+    return
+  } else {
+    ad = appdata;
+    Render.into(APP_DIV, appdata);
+  }
+}
+
+function appDataFromUrl(): AppData | null {
+  let params = new URLSearchParams(location.search.slice(1));
+  let serialized: string | null = params.get("l");
+  if (serialized == null) {
+    return null;
+  }
+  var items: ChecklistItem[];
+  try {
+    items = SerDe.deserialize(serialized);
+  } catch(e) {
+    console.error(e);
+    return null;
+  }
+  return new AppData(items);
 }
 
 namespace SerDe {

@@ -8,6 +8,19 @@ interface ChecklistItem {
   done: boolean;
 }
 
+function itemsEqual(item1: ChecklistItem, item2: ChecklistItem): boolean {
+  if (item1.id == undefined || item2.id == undefined || item1.id !== item2.id) {
+    return false;
+  }
+  if (item1.content == undefined || item2.content == undefined || item1.content !== item2.content) {
+    return false;
+  }
+  if (item1.done == undefined || item2.done == undefined || item1.done !== item2.done) {
+    return false;
+  }
+  return true;
+}
+
 class AppData {
   private data: ChecklistItem[];
 

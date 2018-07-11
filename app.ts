@@ -126,5 +126,3 @@ function appInit() {
   ad = appdata;
   Render.into(APP_DIV, appdata);
 }
-
-window.onload = appInit;

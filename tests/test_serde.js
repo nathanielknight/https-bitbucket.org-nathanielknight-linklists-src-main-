@@ -34,9 +34,10 @@ tests({
         fail("Expected an exception to be thrown");
     },
     "deserializing an invalid list throws an exception": function() {
+        let invalid_list = [{"not": "the", "right": "keys"}];
+        let invalid_serialized = SerDe.serialize(invalid_list);
         try {
-            let invalid_list = [{"not": "the", "right": "keys"}];
-            SerDe.serialize(invalid_list);
+            SerDe.deserialize(invalid_serialized);
         } catch {
             return
         }

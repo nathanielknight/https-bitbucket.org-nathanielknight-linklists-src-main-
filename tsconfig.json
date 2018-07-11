@@ -2,8 +2,9 @@
     "compileOnSave": true,
     "compilerOptions": {
         "strictNullChecks": true,
-        "target": "es5",
+        "target": "es2015",
         "sourceMap": true,
-        "strict": true
+        "strict": true,
+        "lib": ["dom", "es5"]
     },
 }

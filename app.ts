@@ -139,3 +139,37 @@ function appInit() {
   ad = appdata;
   Render.into(APP_DIV, appdata);
 }
+
+namespace SerDe {
+  export function serialize(items: ChecklistItem[]): string {
+    let stringified = JSON.stringify(items);
+    let encoded = btoa(stringified);
+    return encoded;
+  }
+
+  export function deserialize(serialized: string): ChecklistItem[] {
+    let decoded = atob(serialized);
+    let parsed = JSON.parse(decoded);
+    if (!Array.isArray(parsed)) {
+      throw new Error("deserialize was passed an encoded object other than an array");
+    }
+    let result: ChecklistItem[] = [];
+    for (var idx=0; idx<parsed.length; idx++) {
+      // WARNING: Type of src is only notional until it's beenverified.
+      // It's an annotation to keep the compiler happy, not an indication
+      // of src's actual type at runtime.
+      let src: ChecklistItem = parsed[idx];
+      if (src["id"] == undefined || src["content"] == undefined || src["done"] == undefined) {
+        throw new Error("Missing required field");
+
+      }
+      var item: ChecklistItem = {
+        id: String(src["id"]),
+        content: String(src["content"]),
+        done: Boolean(src["done"])
+      };
+      result.push(item);
+    }
+    return result;
+  }
+}

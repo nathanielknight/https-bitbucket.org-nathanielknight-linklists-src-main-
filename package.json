@@ -7,14 +7,10 @@
     "test": "tests"
   },
   "devDependencies": {
-    "atob": "^2.1.1",
-    "ava": "1.0.0-beta.6",
-    "btoa": "^1.2.1",
     "typescript": "^3.0.0-dev.20180707"
   },
   "build": "tsc -p .",
   "scripts": {
-    "test": "ava tests",
     "watch-ts": "tsc -p . -w"
   },
   "repository": {
@@ -23,5 +19,6 @@
   },
   "author": "Nathaniel Knight",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/nathanielknight/web-checklist#readme"
+  "homepage": "https://bitbucket.org/nathanielknight/web-checklist#readme",
+  "dependencies": {}
 }

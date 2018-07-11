@@ -12,7 +12,9 @@ tests({
     "serialize-deserialize is idempotent": function() {
         let serialized = SerDe.serialize(EXAMPLE_ITEMS);
         let round_tripped = SerDe.deserialize(serialized);
-        eq(round_tripped, EXAMPLE_ITEMS);
+        for (idx=0; idx<EXAMPLE_ITEMS.length; idx++) {
+            assert(itemsEqual(round_tripped[idx], EXAMPLE_ITEMS[idx]), "round-trip is idempotent");
+        }
     },
     "deserialize-serialize is idempotent": function() {
         let serialized = SerDe.serialize(EXAMPLE_ITEMS);

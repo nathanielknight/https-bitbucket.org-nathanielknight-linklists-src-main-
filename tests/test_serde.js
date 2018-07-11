@@ -44,9 +44,10 @@ tests({
         fail("Expected an exception to be thrown");
     },
     "deserializing something that's not a list throws an exception": function() {
+        let invalid_object = "Alfalfa falls as a flask";
+        let invalid_serialized = SerDe.serialize(invalid_object);
         try {
-            let invalid_object = "Alfalfa falls as a flask";
-            SerDe.serialize(invalid_object);
+            SerDe.deserialize(invalid_serialized);
         } catch {
             return
         }

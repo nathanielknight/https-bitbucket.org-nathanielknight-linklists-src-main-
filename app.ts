@@ -39,7 +39,7 @@ namespace Render {
     element.classList.add("item-checkbox");
     element.id = item.id;
 
-    let toggle = e => {
+    let toggle = (e: Event) => {
       appdata.toggle(element.id);
       Render.into(APP_DIV, appdata);
     }

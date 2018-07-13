@@ -20,5 +20,7 @@
   "author": "Nathaniel Knight",
   "license": "MIT",
   "homepage": "https://bitbucket.org/nathanielknight/web-checklist#readme",
-  "dependencies": {}
+  "dependencies": {
+    "fnv-lite": "^1.2.0"
+  }
 }

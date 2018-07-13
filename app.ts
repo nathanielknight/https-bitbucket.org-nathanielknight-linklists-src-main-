@@ -1,4 +1,4 @@
-// Checklist loading, saving, rendering, and importing.
+declare const FNV: any;  // Global module because I can't figure out JS
 
 interface ChecklistItem {
   id: string;
@@ -188,5 +188,21 @@ namespace SerDe {
       result.push(item);
     }
     return result;
+  }
+}
+
+namespace Hash {
+  function idString(items: ChecklistItem[]): string {
+    var result = "";
+    for (var idx=0; idx < itemsEqual.length; idx++) {
+      let item = items[idx];
+      result += item.content;
+    }
+    return result;
+  }
+
+  export function signature(items: ChecklistItem[]): string {
+    let s = idString(items);
+     return FNV.hex(s).hash;
   }
 }

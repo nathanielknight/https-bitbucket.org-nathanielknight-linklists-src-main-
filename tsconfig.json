@@ -5,6 +5,6 @@
         "target": "es2015",
         "sourceMap": true,
         "strict": true,
-        "lib": ["dom", "es5"]
+        "lib": ["dom", "es2015"]
     },
 }

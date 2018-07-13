@@ -1,7 +1,5 @@
 // Checklist loading, saving, rendering, and importing.
 
-const APP_DIV = "app";
-
 interface ChecklistItem {
   id: string;
   content: string;
@@ -54,7 +52,7 @@ namespace Render {
 
     let toggle = (e: Event) => {
       appdata.toggle(element.id);
-      Render.into(APP_DIV, appdata);
+      Render.into(appdata);
     }
 
     let checkbox = document.createElement("input");
@@ -95,7 +93,9 @@ namespace Render {
     }
   }
 
-  export function into(divId: string, appdata: AppData): void {
+  let divId: string = "app";
+
+  export function into(appdata: AppData): void {
     let targetElement = document.getElementById(divId);
     if (targetElement == null) {
       throw "Target element not found";
@@ -103,26 +103,44 @@ namespace Render {
     clearNode(targetElement);
     targetElement.appendChild(checklistElement(appdata.items, appdata));
   }
+
+  let titleId: string = "title";
+
+  export function title(title: string): void {
+    let targetElement = document.getElementById(titleId);
+    if (targetElement == null) {
+      throw "Target element not found";
+    }
+    clearNode(targetElement);
+    targetElement.innerText = title;
+
+  }
 }
 
 let ad: AppData | null = null;
 
 function appInit() {
-  let appdata = appDataFromUrl();
-  if (appdata == null) {
+  let params = paramsFromUrl();
+  if (params == null) {
     return
   } else {
+    let appdata = params.data;
+    let title = params.title;
     ad = appdata;
-    Render.into(APP_DIV, appdata);
+    if (title != null) {
+      Render.title(title);
+    }
+    Render.into(appdata);
   }
 }
 
-function appDataFromUrl(): AppData | null {
+function paramsFromUrl(): {data: AppData, title: string | null} | null {
   let params = new URLSearchParams(location.search.slice(1));
   let serialized: string | null = params.get("l");
   if (serialized == null) {
     return null;
   }
+
   var items: ChecklistItem[];
   try {
     items = SerDe.deserialize(serialized);
@@ -130,7 +148,13 @@ function appDataFromUrl(): AppData | null {
     console.error(e);
     return null;
   }
-  return new AppData(items);
+
+  let title = params.get("t");
+
+  return {
+    data: new AppData(items),
+    title: title
+  };
 }
 
 namespace SerDe {

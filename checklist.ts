@@ -28,15 +28,6 @@ class AppData {
     this.title = title;
   }
 
-  private newId(): string {
-    let candidate = Math.random().toString(36).substring(7);
-    if (this.data.some(i => i.id == candidate)) {
-        return this.newId();
-    } else {
-        return candidate;
-    }
-  }
-
   public toggle(itemId: string) {
       this.data.filter(i => i.id === itemId).forEach(i => i.done = !i.done);
       AppStore.put(this.title, this);
@@ -44,6 +35,14 @@ class AppData {
 
   public get items(): ChecklistItem[] {
     return JSON.parse(JSON.stringify(this.data));
+  }
+
+  public static fromContents(title: string, contents: string[]): AppData {
+    let items = [];
+    for (var idx=0; idx<contents.length; idx++) {
+      items.push({id: idx.toString(), content: contents[idx], done: false});
+    }
+    return new AppData(title, items);
   }
 }
 
@@ -183,8 +182,8 @@ namespace SerDe {
       // of src's actual type at runtime.
       let src: ChecklistItem = parsed[idx];
       if (src["id"] == undefined || src["content"] == undefined || src["done"] == undefined) {
+        console.log(src);
         throw new Error("Missing required field");
-
       }
       var item: ChecklistItem = {
         id: String(src["id"]),

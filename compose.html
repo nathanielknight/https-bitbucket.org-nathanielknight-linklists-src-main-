@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="checklist.js"></script>
+    <script src="compose.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Compose a new checklist</h1>
+    <p>
+        Write one item on each line the box below.
+        Provide a title if you'd like.
+        Click the link at the bottom when you're finished.
+    </p>
+    <p><input type="text" id="title"></p>
+    <p>
+        <textarea id="checklist-area" style="width: 40em; height: 16em;"></textarea>
+    </p>
+    <p><a id="checklist-link">Checklist Link</a></p>
+    <script>initCompose();</script>
+</body>
+</html>

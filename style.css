@@ -31,3 +31,15 @@ input[type='checkbox'] {
 input[type='checkbox']:checked + label {
     text-decoration: line-through hsla(0, 0%, 50%, 1);
 }
+
+div#controls {
+    float: right;
+}
+
+div#controls button#clear {
+    color: orangered;
+}
+
+div#controls button#new {
+    color: darkgreen;
+}

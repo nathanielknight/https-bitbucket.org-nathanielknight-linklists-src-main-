@@ -34,8 +34,8 @@ function updateLink(e) {
     p.set("t", params.title);
 
     function linkString(qryParams) {
-        const domain = "localhost:3030/?";
-        return domain + qryParams;
+        const base = "/?";
+        return base + qryParams;
     }
 
     let link = document.getElementById("checklist-link");

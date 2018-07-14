@@ -54,7 +54,6 @@ namespace Render {
 
     let toggle = (e: Event) => {
       appdata.toggle(element.id);
-      Render.into(appdata);
     }
 
     let checkbox = document.createElement("input");

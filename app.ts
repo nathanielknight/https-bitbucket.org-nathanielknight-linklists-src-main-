@@ -194,7 +194,7 @@ namespace SerDe {
 namespace Hash {
   function idString(items: ChecklistItem[]): string {
     var result = "";
-    for (var idx=0; idx < itemsEqual.length; idx++) {
+    for (var idx=0; idx < items.length; idx++) {
       let item = items[idx];
       result += item.content;
     }

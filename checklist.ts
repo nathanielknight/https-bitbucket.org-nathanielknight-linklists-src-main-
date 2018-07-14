@@ -44,6 +44,13 @@ class AppData {
     }
     return new AppData(title, items);
   }
+
+  public clearAll(): void {
+    for (var idx=0; idx < this.data.length; idx++) {
+      this.data[idx].done = false;
+    }
+    AppStore.put(this.title, this);
+  }
 }
 
 namespace Render {
@@ -133,6 +140,17 @@ function appInit() {
   if (appdata != null) {
     let loaded = AppStore.get(title || "blank", appdata) || appdata;
     Render.into(loaded);
+  }
+
+  let clearBtn = document.getElementById("clear");
+  if (clearBtn != null) {
+    clearBtn.onclick = function() {
+      appdata.clearAll();
+      let checkboxes = document.getElementsByTagName("input");
+      for (var idx=0; idx<checkboxes.length; idx++) {
+        checkboxes[idx].checked = false;
+      }
+    }
   }
 }
 

@@ -1,10 +1,13 @@
 (function() {
 
-    const EXAMPLE_DATA = new AppData([
-        {id: "1", content: "First", done: true},
-        {id: "2", content: "Second", done: false},
-        {id: "3", content: "Third", done: false},
-    ]);
+    const EXAMPLE_DATA = new AppData(
+        "Test",
+        [
+            {id: "1", content: "First", done: true},
+            {id: "2", content: "Second", done: false},
+            {id: "3", content: "Third", done: false},
+        ]
+    );
 
     tests({
         "on an empty store, returns null": function(){
@@ -24,7 +27,7 @@
         "can round trip, state is persisted even if not matching": function() {
             localStorage.clear();
             let items = [{id: "1", content: "Test", done: true}];
-            let ad = new AppData(items);
+            let ad = new AppData("example", items);
             ad.toggle("1");
             AppStore.put("Test Items", ad);
             ad.toggle("1");

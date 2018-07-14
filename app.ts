@@ -21,9 +21,11 @@ function itemsEqual(item1: ChecklistItem, item2: ChecklistItem): boolean {
 
 class AppData {
   private data: ChecklistItem[];
+  private title: string;
 
-  constructor(items: ChecklistItem[]) {
+  constructor(title: string, items: ChecklistItem[]) {
     this.data = items;
+    this.title = title;
   }
 
   private newId(): string {
@@ -37,6 +39,7 @@ class AppData {
 
   public toggle(itemId: string) {
       this.data.filter(i => i.id === itemId).forEach(i => i.done = !i.done);
+      AppStore.put(this.title, this);
   }
 
   public get items(): ChecklistItem[] {
@@ -123,14 +126,17 @@ function appInit() {
   let params = paramsFromUrl();
   if (params == null) {
     return
-  } else {
-    let appdata = params.data;
-    let title = params.title;
-    ad = appdata;
-    if (title != null) {
-      Render.title(title);
-    }
-    Render.into(appdata);
+  }
+  let appdata = params.data;
+  ad = appdata;
+  let title = params.title;
+  if (title != null) {
+    Render.title(title);
+    document.title = title;
+  }
+  if (appdata != null) {
+    let loaded = AppStore.get(title || "blank", appdata) || appdata;
+    Render.into(loaded);
   }
 }
 
@@ -152,7 +158,7 @@ function paramsFromUrl(): {data: AppData, title: string | null} | null {
   let title = params.get("t");
 
   return {
-    data: new AppData(items),
+    data: new AppData(title || "blank", items),
     title: title
   };
 }
@@ -222,7 +228,7 @@ namespace AppStore {
     }
     try {
       let items = SerDe.deserialize(val);
-      let newAppData = new AppData(items);
+      let newAppData = new AppData(title, items);
       return newAppData;
     } catch(e) {
       console.error(e);

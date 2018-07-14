@@ -203,6 +203,30 @@ namespace Hash {
 
   export function signature(items: ChecklistItem[]): string {
     let s = idString(items);
-     return FNV.hex(s).hash;
+    return FNV.hex(s);
+  }
+}
+
+namespace AppStore {
+  export function put(title: string, data: AppData): void {
+    let key = title + "|" + Hash.signature(data.items);
+    let val = SerDe.serialize(data.items);
+    localStorage.setItem(key, val);
+  }
+
+  export function get(title: string, data: AppData): AppData | null {
+    let key = title + "|" + Hash.signature(data.items);
+    let val = localStorage.getItem(key);
+    if (val == null) {
+      return null;
+    }
+    try {
+      let items = SerDe.deserialize(val);
+      let newAppData = new AppData(items);
+      return newAppData;
+    } catch(e) {
+      console.error(e);
+      return null;
+    }
   }
 }

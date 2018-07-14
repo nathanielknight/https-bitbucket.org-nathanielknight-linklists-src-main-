@@ -50,25 +50,23 @@ namespace Render {
   function itemElement(item: ChecklistItem, appdata: AppData): HTMLDivElement {
     let element = document.createElement("div");
     element.classList.add("item-checkbox");
-    element.id = item.id;
 
     let toggle = (e: Event) => {
-      appdata.toggle(element.id);
+      appdata.toggle(item.id);
     }
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", item.id);
-    checkbox.onclick = toggle;
     if (item.done) {
       checkbox.setAttribute("checked", "checked");
     }
+    checkbox.addEventListener("change", toggle);
     element.appendChild(checkbox);
 
     let content = document.createElement("label");
     content.classList.add("item-content");
     content.setAttribute("for", item.id);
-    content.onclick = toggle;
     content.innerText = item.content;
     element.appendChild(content);
 

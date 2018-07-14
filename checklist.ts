@@ -94,7 +94,7 @@ namespace Render {
     }
   }
 
-  let divId: string = "app";
+  let divId: string = "checklist";
 
   export function into(appdata: AppData): void {
     let targetElement = document.getElementById(divId);

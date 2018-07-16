@@ -34,7 +34,7 @@ function updateLink(e) {
     p.set("t", params.title);
 
     function linkString(qryParams) {
-        const base = "../?";
+        const base = "./?";
         return base + qryParams;
     }
 

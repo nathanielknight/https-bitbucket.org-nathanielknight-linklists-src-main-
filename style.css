@@ -36,10 +36,10 @@ div#controls {
     float: right;
 }
 
-div#controls button#clear {
-    color: orangered;
+div#controls button {
+    color: darkgreen;
 }
 
-div#controls button#new {
-    color: darkgreen;
+div#controls button#clear {
+    color: orangered;
 }

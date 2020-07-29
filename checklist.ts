@@ -51,6 +51,18 @@ class AppData {
     }
     AppStore.put(this.title, this);
   }
+
+  public asUrlParms(): URLSearchParams {
+    let params = new URLSearchParams();
+
+    let itemString = SerDe.serialize(this.items);
+
+    params.set("t", this.title);
+    params.set("l", itemString);
+
+    const base = "/compose.html?";
+    return params;
+  }
 }
 
 namespace Render {
@@ -152,6 +164,12 @@ function appInit() {
       }
     }
   }
+
+  let cloneBtn = document.getElementById("clone") as HTMLAnchorElement;
+  if (cloneBtn != null) {
+    const base = "/compose.html?"
+    cloneBtn.href = base + appdata.asUrlParms().toString();
+  }
 }
 
 function paramsFromUrl(): {data: AppData, title: string | null} | null {
@@ -172,7 +190,7 @@ function paramsFromUrl(): {data: AppData, title: string | null} | null {
   let title = params.get("t");
 
   return {
-    data: new AppData(title || "blank", items),
+    data: new AppData(title || "", items),
     title: title
   };
 }

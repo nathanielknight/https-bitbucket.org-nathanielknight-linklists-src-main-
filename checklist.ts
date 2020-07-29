@@ -29,8 +29,8 @@ class AppData {
   }
 
   public toggle(itemId: string) {
-      this.data.filter(i => i.id === itemId).forEach(i => i.done = !i.done);
-      AppStore.put(this.title, this);
+    this.data.filter(i => i.id === itemId).forEach(i => i.done = !i.done);
+    AppStore.put(this.title, this);
   }
 
   public get items(): ChecklistItem[] {
@@ -39,14 +39,14 @@ class AppData {
 
   public static fromContents(title: string, contents: string[]): AppData {
     let items = [];
-    for (var idx=0; idx<contents.length; idx++) {
-      items.push({id: idx.toString(), content: contents[idx], done: false});
+    for (var idx = 0; idx < contents.length; idx++) {
+      items.push({ id: idx.toString(), content: contents[idx], done: false });
     }
     return new AppData(title, items);
   }
 
   public clearAll(): void {
-    for (var idx=0; idx < this.data.length; idx++) {
+    for (var idx = 0; idx < this.data.length; idx++) {
       this.data[idx].done = false;
     }
     AppStore.put(this.title, this);
@@ -156,10 +156,10 @@ function appInit() {
 
   let clearBtn = document.getElementById("clear");
   if (clearBtn != null) {
-    clearBtn.onclick = function() {
+    clearBtn.onclick = function () {
       appdata.clearAll();
       let checkboxes = document.getElementsByTagName("input");
-      for (var idx=0; idx<checkboxes.length; idx++) {
+      for (var idx = 0; idx < checkboxes.length; idx++) {
         checkboxes[idx].checked = false;
       }
     }
@@ -172,7 +172,7 @@ function appInit() {
   }
 }
 
-function paramsFromUrl(): {data: AppData, title: string | null} | null {
+function paramsFromUrl(): { data: AppData, title: string | null } | null {
   let params = new URLSearchParams(location.search.slice(1));
   let serialized: string | null = params.get("l");
   if (serialized == null) {
@@ -182,7 +182,7 @@ function paramsFromUrl(): {data: AppData, title: string | null} | null {
   var items: ChecklistItem[];
   try {
     items = SerDe.deserialize(serialized);
-  } catch(e) {
+  } catch (e) {
     console.error(e);
     return null;
   }
@@ -209,7 +209,7 @@ namespace SerDe {
       throw new Error("deserialize was passed an encoded object other than an array");
     }
     let result: ChecklistItem[] = [];
-    for (var idx=0; idx<parsed.length; idx++) {
+    for (var idx = 0; idx < parsed.length; idx++) {
       // WARNING: Type of src is only notional until it's beenverified.
       // It's an annotation to keep the compiler happy, not an indication
       // of src's actual type at runtime.
@@ -232,7 +232,7 @@ namespace SerDe {
 namespace Hash {
   function idString(items: ChecklistItem[]): string {
     var result = "";
-    for (var idx=0; idx < items.length; idx++) {
+    for (var idx = 0; idx < items.length; idx++) {
       let item = items[idx];
       result += item.content;
     }
@@ -262,7 +262,7 @@ namespace AppStore {
       let items = SerDe.deserialize(val);
       let newAppData = new AppData(title, items);
       return newAppData;
-    } catch(e) {
+    } catch (e) {
       console.error(e);
       return null;
     }

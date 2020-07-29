@@ -167,7 +167,7 @@ function appInit() {
 
   let cloneBtn = document.getElementById("clone") as HTMLAnchorElement;
   if (cloneBtn != null) {
-    const base = "/compose.html?"
+    const base = "./compose.html?"
     cloneBtn.href = base + appdata.asUrlParms().toString();
   }
 }

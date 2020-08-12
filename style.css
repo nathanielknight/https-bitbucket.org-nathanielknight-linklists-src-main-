@@ -30,6 +30,7 @@ input[type='checkbox'] {
 
 input[type='checkbox']:checked + label {
     text-decoration: line-through hsla(0, 0%, 50%, 1);
+    color: darkgray;
 }
 
 div#controls {
